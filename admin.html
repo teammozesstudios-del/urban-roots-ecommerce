@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urban Roots - Admin Dashboard</title>
+    <link rel="stylesheet" href="css/admin-styles.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-logo">
+                <h1>Urban Roots</h1>
+                <p style="font-size: 12px; opacity: 0.8;">Admin Panel</p>
+            </div>
+            <ul class="admin-menu">
+                <li class="admin-menu-item"><a href="admin.html" class="active">Dashboard</a></li>
+                <li class="admin-menu-item"><a href="#" onclick="showSection('products')">Manage Products</a></li>
+                <li class="admin-menu-item"><a href="#" onclick="showSection('blogs')">Manage Blogs</a></li>
+                <li class="admin-menu-item"><a href="#" onclick="showSection('ads')">Manage Ads</a></li>
+                <li class="admin-menu-item"><a href="#" onclick="showSection('videos')">Manage Videos</a></li>
+                <li class="admin-menu-item" style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+                    <a href="#" onclick="logoutAdmin()" style="color: #ffcccc;">Logout</a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="admin-main">
+            <!-- Header -->
+            <div class="admin-header">
+                <h2>Admin Dashboard</h2>
+                <div class="admin-user">
+                    <img src="images/pp.png" alt="Admin">
+                    <span id="admin-name">Administrator</span>
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="admin-content">
+                <!-- Dashboard Section -->
+                <div id="dashboard-section">
+                    <h1 style="color: #006838; margin-bottom: 30px;">Dashboard Overview</h1>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-label">Total Products</div>
+                            <div class="stat-value" id="total-products">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Total Blog Posts</div>
+                            <div class="stat-value" id="total-blogs">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Total Videos</div>
+                            <div class="stat-value" id="total-videos">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Active Ads</div>
+                            <div class="stat-value" id="total-ads">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Products Section -->
+                <div id="products-section" style="display: none;">
+                    <div class="admin-table">
+                        <div class="admin-table-header">
+                            <h3>Manage Products</h3>
+                            <button class="btn btn-primary" onclick="showProductForm()">+ Add Product</button>
+                        </div>
+                        <table id="products-table">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Label</th>
+                                    <th>Rating</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="products-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Blogs Section -->
+                <div id="blogs-section" style="display: none;">
+                    <div class="admin-table">
+                        <div class="admin-table-header">
+                            <h3>Manage Blog Posts</h3>
+                            <button class="btn btn-primary" onclick="showBlogForm()">+ Add Blog</button>
+                        </div>
+                        <table id="blogs-table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Label</th>
+                                    <th>Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="blogs-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Ads Section -->
+                <div id="ads-section" style="display: none;">
+                    <div class="admin-table">
+                        <div class="admin-table-header">
+                            <h3>Manage Advertisements</h3>
+                            <button class="btn btn-primary" onclick="showAdForm()">+ Add Ad</button>
+                        </div>
+                        <table id="ads-table">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ads-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Videos Section -->
+                <div id="videos-section" style="display: none;">
+                    <div class="admin-table">
+                        <div class="admin-table-header">
+                            <h3>Manage Videos</h3>
+                            <button class="btn btn-primary" onclick="showVideoForm()">+ Add Video</button>
+                        </div>
+                        <table id="videos-table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>YouTube URL</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="videos-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Form Modal -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add/Edit Product</h3>
+                <button class="modal-close" onclick="closeProductModal()">&times;</button>
+            </div>
+            <form onsubmit="saveProduct(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Product Name</label>
+                        <input type="text" id="product-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Price (LKR)</label>
+                        <input type="number" id="product-price" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Subscription Price (LKR/month)</label>
+                        <input type="number" id="product-sub-price" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Label</label>
+                        <input type="text" id="product-label" placeholder="e.g., Indoor, Large Plants" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Rating (0-5)</label>
+                        <input type="number" id="product-rating" min="0" max="5" step="0.1" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Reviews Count</label>
+                        <input type="number" id="product-reviews" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Sold Count</label>
+                        <input type="number" id="product-sold" required>
+                    </div>
+                </div>
+                <div class="form-row full">
+                    <div class="form-group">
+                        <label>Product Image URL</label>
+                        <input type="url" id="product-image" placeholder="https://example.com/image.jpg" required>
+                    </div>
+                </div>
+                <div class="form-row full">
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="product-description" required></textarea>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-save">Save Product</button>
+                    <button type="button" class="btn-cancel" onclick="closeProductModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Blog Form Modal -->
+    <div id="blog-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add/Edit Blog Post</h3>
+                <button class="modal-close" onclick="closeBlogModal()">&times;</button>
+            </div>
+            <form onsubmit="saveBlog(event)">
+                <div class="form-group">
+                    <label>Blog Title</label>
+                    <input type="text" id="blog-title" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Label</label>
+                        <input type="text" id="blog-label" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" id="blog-date" required>
+                    </div>
+                </div>
+                <div class="form-row full">
+                    <div class="form-group">
+                        <label>Blog Image URL</label>
+                        <input type="url" id="blog-image" required>
+                    </div>
+                </div>
+                <div class="form-row full">
+                    <div class="form-group">
+                        <label>Excerpt (First 35 words)</label>
+                        <textarea id="blog-excerpt" required></textarea>
+                    </div>
+                </div>
+                <div class="form-row full">
+                    <div class="form-group">
+                        <label>Full Content</label>
+                        <textarea id="blog-content" style="min-height: 150px;" required></textarea>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-save">Save Blog</button>
+                    <button type="button" class="btn-cancel" onclick="closeBlogModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Ad Form Modal -->
+    <div id="ad-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add/Edit Advertisement</h3>
+                <button class="modal-close" onclick="closeAdModal()">&times;</button>
+            </div>
+            <form onsubmit="saveAd(event)">
+                <div class="form-group">
+                    <label>Ad Title</label>
+                    <input type="text" id="ad-title" required>
+                </div>
+                <div class="form-row full">
+                    <div class="form-group">
+                        <label>Ad Image URL</label>
+                        <input type="url" id="ad-image" required>
+                    </div>
+                </div>
+                <div class="form-row full">
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="ad-description" required></textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Button Text</label>
+                        <input type="text" id="ad-button-text" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Button Link</label>
+                        <input type="url" id="ad-button-link" required>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-save">Save Ad</button>
+                    <button type="button" class="btn-cancel" onclick="closeAdModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Video Form Modal -->
+    <div id="video-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add/Edit Video</h3>
+                <button class="modal-close" onclick="closeVideoModal()">&times;</button>
+            </div>
+            <form onsubmit="saveVideo(event)">
+                <div class="form-group">
+                    <label>Video Title</label>
+                    <input type="text" id="video-title" required>
+                </div>
+                <div class="form-group">
+                    <label>YouTube Embed URL</label>
+                    <input type="url" id="video-url" placeholder="https://www.youtube.com/embed/..." required>
+                </div>
+                <small style="color: #666; display: block; margin-bottom: 15px;">
+                    Get the embed URL from YouTube. Example: https://www.youtube.com/embed/dQw4w9WgXcQ
+                </small>
+                <div class="form-actions">
+                    <button type="submit" class="btn-save">Save Video</button>
+                    <button type="button" class="btn-cancel" onclick="closeVideoModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>
