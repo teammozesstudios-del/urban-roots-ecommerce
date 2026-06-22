@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urban Roots - Checkout</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <img src="images/logo.png" alt="Urban Roots Logo" class="navbar-logo" onclick="goHome()">
+        
+        <div class="navbar-center">
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="blog.html">Blog</a>
+        </div>
+        
+        <div class="navbar-right">
+            <div class="dropdown">
+                <button class="icon-btn" id="heart-btn" onclick="toggleFavorites()">❤️</button>
+                <div class="dropdown-menu" id="favorites-menu">
+                    <div id="favorites-list" style="max-height: 400px; overflow-y: auto; padding: 10px;"></div>
+                    <div style="padding: 10px; border-top: 1px solid #e0e0e0;">
+                        <button class="btn btn-primary btn-block" onclick="goToPayment()">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="icon-btn" id="bell-btn" onclick="toggleNotifications()">
+                    🔔
+                    <span class="badge" id="notification-count">0</span>
+                </button>
+                <div class="dropdown-menu" id="notifications-menu" style="width: 300px;">
+                    <div id="notifications-list" style="max-height: 400px; overflow-y: auto;"></div>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="icon-btn profile-icon" onclick="toggleProfileMenu()">
+                    <img src="images/pp.png" alt="Profile" id="profile-img">
+                </button>
+                <div class="dropdown-menu" id="profile-menu">
+                    <a href="profile.html">Profile</a>
+                    <a href="settings.html">Settings</a>
+                    <button onclick="logout()">Log Out</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Checkout Section -->
+    <section class="section">
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <h1 class="section-title">Product Checkout</h1>
+            
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 30px;">
+                <!-- Product Details -->
+                <div>
+                    <div id="product-details" style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);"></div>
+                </div>
+                
+                <!-- Order Summary -->
+                <div>
+                    <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+                        <h2 style="color: #006838; margin-bottom: 20px; font-size: 20px;">Order Summary</h2>
+                        
+                        <div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #e0e0e0;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span>Subtotal:</span>
+                                <span id="subtotal">LKR 0</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span>Shipping:</span>
+                                <span id="shipping">LKR 500</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span>Tax:</span>
+                                <span id="tax">LKR 0</span>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 18px; color: #006838; margin-bottom: 20px;">
+                            <span>Total:</span>
+                            <span id="total">LKR 0</span>
+                        </div>
+                        
+                        <button class="btn btn-primary btn-block" onclick="goToPayment()" style="padding: 12px; font-size: 16px;">Proceed to Payment</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Urban Roots</h3>
+                <p>Your trusted destination for premium indoor and outdoor plants.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a><br>
+                <a href="shop.html">Shop</a><br>
+                <a href="blog.html">Blog</a><br>
+                <a href="profile.html">My Account</a>
+            </div>
+            <div class="footer-section">
+                <h3>Customer Support</h3>
+                <a href="#">Contact Us</a><br>
+                <a href="#">FAQs</a><br>
+                <a href="#">Shipping Info</a><br>
+                <a href="#">Returns</a>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <a href="#">Facebook</a><br>
+                <a href="#">Instagram</a><br>
+                <a href="#">Twitter</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Urban Roots. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/checkout.js"></script>
+</body>
+</html>
