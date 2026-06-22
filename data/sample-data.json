@@ -1,0 +1,56 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Monstera Deliciosa",
+      "price": 4500,
+      "subscriptionPrice": 1500,
+      "rating": 4.8,
+      "reviews": 124,
+      "sold": 850,
+      "image": "images/products/monstera.jpg",
+      "label": "Indoor",
+      "description": "Known as the Swiss Cheese Plant, this iconic tropical beauty features stunning fenestrated leaves. It thrives in indirect light and adds a lush, modern aesthetic to any interior living space effortlessly."
+    },
+    {
+      "id": 2,
+      "name": "Snake Plant",
+      "price": 3500,
+      "subscriptionPrice": 1200,
+      "rating": 4.7,
+      "reviews": 98,
+      "sold": 720,
+      "image": "images/products/snake-plant.jpg",
+      "label": "Low Maintenance",
+      "description": "A resilient and stylish houseplant that thrives in various light conditions. Perfect for beginners and busy plant lovers who want air-purifying benefits."
+    }
+  ],
+  "blogs": [
+    {
+      "id": 1,
+      "title": "How to Care for Indoor Plants",
+      "excerpt": "Indoor plants add life and freshness to your home. Here are essential tips for keeping them thriving...",
+      "content": "Indoor plants add life and freshness to your home. Here are essential tips for keeping them thriving throughout the year. Learn about watering schedules, lighting requirements, and humidity levels that different plants need.",
+      "image": "images/blogs/indoor-care.jpg",
+      "date": "2024-06-20",
+      "label": "Care Tips"
+    }
+  ],
+  "ads": [
+    {
+      "id": 1,
+      "title": "Summer Plant Collection",
+      "description": "Discover our exclusive summer collection of tropical plants. Get 20% off on all monstera varieties this week!",
+      "image": "images/ads/summer-sale.jpg",
+      "buttonText": "Shop Now",
+      "buttonLink": "shop.html"
+    }
+  ],
+  "videos": [
+    {
+      "id": 1,
+      "title": "Plant Care Basics",
+      "url": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    }
+  ]
+}
